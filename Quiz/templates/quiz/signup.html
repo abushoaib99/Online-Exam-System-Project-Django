@@ -1,0 +1,40 @@
+{% extends 'quiz/base.html' %}
+{% block title %}Signup{% endblock %}
+{% block nav %}
+<body>
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-danger">
+					<div class="panel-heading">Online Quiz System</div>
+					<div class="panel-body">Quiz</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-danger">
+					<div class="panel panel-heading">Signup Form</div>
+					<div class="panel-body">
+
+						<form method="post" action="" enctype="multipart/form-data">
+                            {% csrf_token%}
+                             {{ form.as_p }}
+							<button type="submit"  class="btn btn-default">Submit</button>
+                        <a href="{% url 'home:login' %}">Login</a>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+{% endblock%}

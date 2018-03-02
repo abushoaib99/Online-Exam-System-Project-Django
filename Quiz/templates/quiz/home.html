@@ -1,0 +1,82 @@
+{% extends 'quiz/base.html' %}
+{% block nav %}
+<body>
+
+<div class="container">
+	<div style="margin-top:10px" class="panel panel-primary">
+		<div style="text-align:center;font-size:25px;font-family:arial black"class="panel-heading">Online Quiz</div>
+	</div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#Profile">Profile</a></li>
+    <li><a data-toggle="tab" href="#YourQuiz">Your Quiz</a></li>
+
+    <li style="float:right"><a href="{% url 'home:log' %}">Logout</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+	 <div id="home" class="tab-pane fade in active">
+      <h3>Home</h3>
+
+      <p>This platform for exam.</p>
+    </div>
+
+	<div id="Profile" class="tab-pane fade">
+      <h3>Showing Profile</h3>
+		<table class="table">
+			<thead>
+			  <tr>
+				<th>Id</th>
+				<th>Username</th>
+				<th>Email</th>
+			  </tr>
+			</thead>
+            <tbody>
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            </tbody>
+		</table>
+    </div>
+
+    <div id="YourQuiz" class="tab-pane fade">
+      <center><h4 style="color:#286090">Time: 2 Hour</h4></center>
+        <div class="form-group cl-md-4">
+            {% if messages %}
+                <ul class="message">
+                    {% for message in messages %}
+                        <li class="alert alert-danger">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+      <center><button type="button" class="btn btn-primary" data-toggle="tab" href="#select">Start Quiz</button></center>
+
+		<div class="col-sm-4"></div>
+			<div class="col-sm-4"><br>
+			  <div id="select" class="tab-pane fade">
+
+				<form action="" method="post">
+                {% csrf_token %}
+				<select class="form-control" id="" name="cat">
+					<option disabled>select Subject</option>
+                    {% for s in subject%}
+					<option value="{{ s.id }}">{{ s.sub }}</option>
+                    {% endfor %}
+				</select><br>
+				<center><input type="submit"  name="send" value="Start" class="btn btn-primary"/></center>
+				 </form>
+
+
+				</div>
+			</div>
+		<div class="col-sm-4"></div>
+	</div>
+  </div>
+</div>
+
+</body>
+{% endblock %}
